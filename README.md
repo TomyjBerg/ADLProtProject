@@ -10,12 +10,12 @@ All explained here: https://www.youtube.com/watch?v=28eLP22SMTA&t=575s&ab_channe
 
 pip install numpy
 pip install -U matplotlib
-pip install open3d
 pip install -U scikit-learn
 pip install torch==1.12.0+cpu torchvision==0.13.0+cpu torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cpu
 pip install torch-scatter -f https://data.pyg.org/whl/torch-1.12.0+cpu.html
 pip install torch-sparse -f https://data.pyg.org/whl/torch-1.12.0+cpu.html
 pip install torch-geometric
+pip install torch-cluster -f https://data.pyg.org/whl/torch-1.12.0+cpu.html
 
 - In the console, type pip freeze to show all the packages that were installed and their versions, then you can copy the output of this to the requirements.txt textfile. (I can't do this as I have already installed some stupid packages in my venv that we will not need for our project)
 
