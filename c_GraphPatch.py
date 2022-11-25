@@ -7,12 +7,12 @@ class GraphPatch:
 
     def __init__(self, feature_matrix, A, edge_index, edge_weight, edge_data, fitness_value, coords, mutant_name):
         self.coords = coords
-        self.edge_data = edge_data
-        self.A = A
-        self.edge_index = edge_index
+        self.edge_data = edge_data #??
+        self.A = A #adjency matrix ADJ
+        self.edge_index = edge_index 
         self.edge_weight = np.reshape(edge_weight, (edge_weight.shape[0], 1))
         self.features = feature_matrix
-        self.fitness = np.asarray(fitness_value, dtype=np.float64)
+        self.fitness = np.asarray(fitness_value, dtype=np.float64) #label
         self.mutant = mutant_name
 
     def num_nodes(self):
