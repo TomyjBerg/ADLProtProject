@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 surfaces/
+surfaces_graphs/
 # C extensions
 *.so
 
