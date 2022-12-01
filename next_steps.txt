@@ -1,0 +1,16 @@
+1. Extract patches function
+    - torch_geometric cluster/knn function --> use this
+    - geodesic distance 
+    - create list of node indexes
+    - pytorch_geometric subgraph()
+
+import both pkl of a complex
+- label 1 - couples
+- laber 0 - pool
+
+
+2. create function that randomly forms couples from the pool
+
+
+find out how to put two graphs into one Data() object
+
