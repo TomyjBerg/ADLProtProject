@@ -1,13 +1,13 @@
 from typing import List, Optional, Tuple, Union
-import numpy as np
 import torch
 from torch import Tensor
-
-
 from torch_geometric.typing import PairTensor
 from torch_geometric.utils.mask import index_to_mask
 from torch_geometric.utils.num_nodes import maybe_num_nodes
 import random 
+import numpy as np
+import pandas as pd
+from c_GraphPatch import GraphPatch
 
 
 
@@ -75,4 +75,9 @@ def k_subgraph_perso(
     return subset, edge_index, inv, edge_mask
 
 
-    
+def create_patches(subset,edge_index,features):
+    features_patches = features.iloc[list(np.asarray(subset))]
+    GraphPatch(features_matrix = features_patches,edge_index=edge_index)
+    return GraphPatch
+
+
