@@ -77,7 +77,7 @@ def k_subgraph_perso(
 
 def create_patches(subset,edge_index,features):
     features_patches = features.iloc[list(np.asarray(subset))]
-    GraphPatch(features_matrix = features_patches,edge_index=edge_index)
+    GraphPatch(feature_matrix = features_patches,edge_index=edge_index)
     return GraphPatch
 
 
