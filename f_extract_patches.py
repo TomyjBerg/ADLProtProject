@@ -7,7 +7,7 @@ from torch_geometric.utils.num_nodes import maybe_num_nodes
 import random 
 import numpy as np
 import pandas as pd
-from c_GraphPatch import GraphPatch
+from c_ProteinGraph import ProteinGraph
 
 
 
@@ -77,7 +77,17 @@ def k_subgraph_perso(
 
 def create_patches(subset,edge_index,features):
     features_patches = features.iloc[list(np.asarray(subset))]
-    GraphPatch(feature_matrix = features_patches,edge_index=edge_index)
-    return GraphPatch
+    patch = [subset,edge_index,features_patches]
+    return patch
 
+def extract_patches(prot,max_graph_size,number_wanted):
+    patches = ()
+    for i in range(number_wanted):
+        center_node = random.randint(0,prot.features.shape[0])
+        subset,edge_index,mapping,edge_mask = k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
+        patch = create_patches(subset,edge_index,prot.features)
+        patches.append(patch)
+    return patches
+    
+    
 
