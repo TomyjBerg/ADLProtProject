@@ -81,7 +81,7 @@ def create_patches(subset,edge_index,features):
     return patch
 
 def extract_patches(prot,max_graph_size,number_wanted):
-    patches = ()
+    patches = []
     for i in range(number_wanted):
         center_node = random.randint(0,prot.features.shape[0])
         subset,edge_index,mapping,edge_mask = k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
