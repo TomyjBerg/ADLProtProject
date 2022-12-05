@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 surfaces/
 surfaces_graphs/
+surfaces_graphs_iface/
 # C extensions
 *.so
 
