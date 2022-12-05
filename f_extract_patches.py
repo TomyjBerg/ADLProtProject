@@ -59,7 +59,6 @@ def k_subgraph_perso(
                 list_list.remove(k)
             list_np = np.asarray(list_list)
             subset = torch.from_numpy(list_np)
-
             break
         
     
