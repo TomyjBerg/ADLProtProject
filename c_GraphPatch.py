@@ -2,21 +2,25 @@ import numpy as np
 
 class GraphPatch:
 
-    '''Class storing the data of an extracted surface patch graph, including coordinates of the graph nodes, 
-    the features, the adjacency information, the edge_attributes and the fitness and the name of the mutant'''
+    '''Class storing the data of an extracted surface patch, including the features of the nodes,
+    the indexes of the nodes (from the whole protein), the edge_index, the label of the patch and 
+    the name of the protein it has been taken from: Save data in this class as follows: 
+    
+    from c_GraphPatch import GraphPatch
+    name_of_object = GraphPatch(features, indexes, edge_index, label, name)
 
-    def __init__(self, feature_matrix, A, edge_index, edge_weight, edge_data, fitness_value, coords, mutant_name):
-        self.coords = coords
-        self.edge_data = edge_data #??
-        self.A = A #adjency matrix ADJ
-        self.edge_index = edge_index 
-        self.edge_weight = np.reshape(edge_weight, (edge_weight.shape[0], 1))
-        self.features = feature_matrix
-        self.fitness = np.asarray(fitness_value, dtype=np.float64) #label
-        self.mutant = mutant_name
+    It would be best if all inputs were already torch tensors with dtype float32 (Except the name)
+    '''
+
+    def __init__(self, features, indexes, edge_index, label, name):
+        self.x = features
+        self.indexes = indexes
+        self.edge_index = edge_index
+        self.y = label
+        self.name = name
 
     def num_nodes(self):
-        return len(self.coords)
+        return self.features.shape[0]
 
     def num_edges(self):
         return self.edge_index.shape[1]
@@ -28,12 +32,8 @@ class GraphPatch:
         string = '\
             Number of Nodes: {n}\n\
             Features: {f}\n\
-            Adjacency Matrix: {a}\n\
-            Edge Weights (Geodesic Distances): {w}\n\
             Edge Index: {i}\n\
-            Fitness: {fit}\n\
-            Coordinates of Points: {c}\n\
-            Mutant Name: {name}'\
-            .format(n = self.coords.shape[0], f = self.features.shape, a = self.A.shape, w = self.edge_weight.shape, \
-            i = self.edge_index.shape, fit=self.fitness, c = self.coords.shape, name = self.mutant)
+            Fitness: {y}\n\
+            Protein Name: {name}'\
+            .format(n = self.features.shape[0], f = self.features.shape, i = self.edge_index.shape, y=self.y, name = self.name)
         return string
