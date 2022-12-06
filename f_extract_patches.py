@@ -8,6 +8,8 @@ import random
 import numpy as np
 import pandas as pd
 from c_ProteinGraph import ProteinGraph
+from c_GraphPatch import GraphPatch
+from helper_functions import save_object
 
 
 
@@ -70,23 +72,56 @@ def k_subgraph_perso(
 
     edge_index = edge_index[:, edge_mask]
 
+    node_idx = row.new_full((num_nodes, ), -1)
+    node_idx[subset] = torch.arange(subset.size(0), device=row.device)
+    edge_index_relab = node_idx[edge_index]
+    
 
-    return subset, edge_index, inv, edge_mask
+
+    return subset, edge_index, edge_index_relab,inv, edge_mask
 
 
-def create_patches(subset,edge_index,features):
-    features_patches = features.iloc[list(np.asarray(subset))]
-    patch = [subset,edge_index,features_patches]
+def create_patches(subset,edge_index_relab,prot,lab):
+    features_patches = prot.features.iloc[list(np.asarray(subset))]
+    features_patches = torch.Tensor(np.asarray(features_patches))
+    sub_idx = subset
+    sub_edge_index = edge_index_relab
+    names = prot.name
+    patch = GraphPatch(features_patches,sub_idx,sub_edge_index,lab,names)
     return patch
 
-def extract_patches(prot,max_graph_size,number_wanted):
-    patches = []
+def match_iface(sub,iface,match_criteria):
+    compteur = 0
+    sub = list(np.asarray(sub))
+    for i in range(len(sub)):
+        if sub[i] not in iface:
+            compteur = compteur+1
+    perc = compteur/len(sub)
+    if perc > match_criteria:
+        return False
+    else:
+        return True
+
+
+def extract_patches(prot,max_graph_size,number_wanted,match_criteria,file_lab_0,file_lab_1):
+    center_iface = prot.iface_center[0]
+    sub_iface,edge_index_iface,edge_index_iface_relab,_,_  = k_subgraph_perso(center_iface,
+                                                            prot.edge_index,max_nodes=max_graph_size)
+    file_lab_1 = file_lab_1 + '/' + prot.name
+    file_lab_0 = file_lab_0 + '/' + prot.name 
+    if match_iface(sub_iface,prot.iface_idx,match_criteria):
+        patch = create_patches(sub_iface,edge_index_iface_relab,prot,1)
+        
+        save_object(patch,file_lab_1)
+        print(prot.name + ' lab ' + str(1))
+
     for i in range(number_wanted):
         center_node = random.randint(0,prot.features.shape[0])
-        subset,edge_index,mapping,edge_mask = k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
-        patch = create_patches(subset,edge_index,prot.features)
-        patches.append(patch)
-    return patches
-    
+        subset,edge_index,edge_index_relab,_,_= k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
+        patch = create_patches(subset,edge_index_relab,prot,0)
+        filename_0 = file_lab_0 + '_' + str(i)
+        save_object(patch,filename_0)
+        print(prot.name + ' lab ' + str(2))
+
     
 

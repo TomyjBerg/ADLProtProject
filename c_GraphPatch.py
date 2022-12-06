@@ -35,5 +35,5 @@ class GraphPatch:
             Edge Index: {i}\n\
             Fitness: {y}\n\
             Protein Name: {name}'\
-            .format(n = self.features.shape[0], f = self.features.shape, i = self.edge_index.shape, y=self.y, name = self.name)
+            .format(n = self.indexes.shape[0], f = self.x.shape, i = self.edge_index.shape, y=self.y, name = self.name)
         return string
