@@ -82,7 +82,8 @@ def k_subgraph_perso(
 
 
 def create_patches(subset,edge_index_relab,prot,lab):
-    features_patches = prot.features.iloc[list(np.asarray(subset))]
+    features = prot.features.iloc[list(np.asarray(subset))]
+    features_patches = features[['charge','hbond','hphob']]
     features_patches = torch.Tensor(np.asarray(features_patches))
     sub_idx = subset
     sub_edge_index = edge_index_relab
@@ -123,8 +124,11 @@ def extract_patches(prot_complex,max_graph_size,number_wanted,match_criteria,fil
     for prot in prot_complex:
         file_lab_0_A = file_lab_0 + '/' + prot.name
         for i in range(number_wanted):
-            center_node = random.randint(0,prot.features.shape[0])
-            subset,edge_index,edge_index_relab,_,_= k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
+            match_bool = True
+            while match_bool == True:
+                center_node = random.randint(0,prot.features.shape[0]-1)
+                subset,edge_index,edge_index_relab,_,_= k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
+                match_bool = match_iface (subset,prot.iface_idx,match_criteria)
             patch = create_patches(subset,edge_index_relab,prot,0)
             filename_0 = file_lab_0_A + '_' + str(i)
             save_object(patch,filename_0)
