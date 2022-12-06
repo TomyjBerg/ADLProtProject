@@ -1,5 +1,5 @@
 # ADLProtProject
-# Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks. 
+### Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks. 
 
 
 
