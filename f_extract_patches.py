@@ -103,25 +103,30 @@ def match_iface(sub,iface,match_criteria):
         return True
 
 
-def extract_patches(prot,max_graph_size,number_wanted,match_criteria,file_lab_0,file_lab_1):
-    center_iface = prot.iface_center[0]
-    sub_iface,edge_index_iface,edge_index_iface_relab,_,_  = k_subgraph_perso(center_iface,
-                                                            prot.edge_index,max_nodes=max_graph_size)
-    file_lab_1 = file_lab_1 + '/' + prot.name
-    file_lab_0 = file_lab_0 + '/' + prot.name 
-    if match_iface(sub_iface,prot.iface_idx,match_criteria):
-        patch = create_patches(sub_iface,edge_index_iface_relab,prot,1)
-        
-        save_object(patch,file_lab_1)
-        print(prot.name + ' lab ' + str(1))
-
-    for i in range(number_wanted):
-        center_node = random.randint(0,prot.features.shape[0])
-        subset,edge_index,edge_index_relab,_,_= k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
-        patch = create_patches(subset,edge_index_relab,prot,0)
-        filename_0 = file_lab_0 + '_' + str(i)
-        save_object(patch,filename_0)
-        print(prot.name + ' lab ' + str(2))
-
+def extract_patches(prot_complex,max_graph_size,number_wanted,match_criteria,file_lab_0,file_lab_1):
     
+    sub_iface_complex = []
+    edge_index_iface_relab_complex = []
+    for prot in prot_complex:
+        center_iface = prot.iface_center[0]
+        sub_iface,edge_index_iface,edge_index_iface_relab,_,_  = k_subgraph_perso(center_iface,
+                                                            prot.edge_index,max_nodes=max_graph_size)
+        sub_iface_complex.append(sub_iface)
+        edge_index_iface_relab_complex.append(edge_index_iface_relab)
+
+    if match_iface (sub_iface_complex[0],prot_complex[0].iface_idx,match_criteria) & match_iface(sub_iface_complex[1],prot_complex[1].iface_idx,match_criteria):
+        for i in range(len(prot_complex)):
+            patch = create_patches(sub_iface_complex[i],edge_index_iface_relab_complex[i],prot_complex[i],1)
+            file_lab_1_A = file_lab_1 + '/' + prot_complex[i].name
+            save_object(patch,file_lab_1_A)
+            print(prot_complex[i].name + ' lab ' + str(1))
+    for prot in prot_complex:
+        file_lab_0_A = file_lab_0 + '/' + prot.name
+        for i in range(number_wanted):
+            center_node = random.randint(0,prot.features.shape[0])
+            subset,edge_index,edge_index_relab,_,_= k_subgraph_perso(center_node,prot.edge_index,max_nodes=max_graph_size)
+            patch = create_patches(subset,edge_index_relab,prot,0)
+            filename_0 = file_lab_0_A + '_' + str(i)
+            save_object(patch,filename_0)
+            print(prot.name + ' lab ' + str(2))    
 
