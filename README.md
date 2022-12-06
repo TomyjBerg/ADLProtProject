@@ -1,7 +1,9 @@
 # ADLProtProject
-Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks. 
+# Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks. 
 
 
+
+---------------------------------------------------------------------------------------------------
 ### Instructions on creating virtual environment with all required packages: 
 
 - Download python version 3.9.13, custom installation, save it somewhere at a defined place
