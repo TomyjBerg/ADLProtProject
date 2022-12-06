@@ -1,7 +1,8 @@
 # ADLProtProject
+Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks. 
 
 
-Instructions on creating virtual environment with all required packages: 
+### Instructions on creating virtual environment with all required packages: 
 
 - Download python version 3.9.13, custom installation, save it somewhere at a defined place
 - Create the venv in the folder where the project files are with path to the downloaded python 3.9.13
@@ -24,7 +25,7 @@ In the console, type pip freeze to show all the packages that were installed and
 This combination of pytorch 1.12.0 with pytorch geometric works fine for me, many other combinations have not worked. This is the cpu installation, later we could switch to the cuda installations for GPU. You can try it by running example_GNN
 
 
-# When training models on GPU conda version 11.6 (to get cuda version: nvcc --version)
+### When training models on GPU conda version 11.6 (to get cuda version: nvcc --version)
 
 - pip install numpy
 - pip install -U matplotlib
