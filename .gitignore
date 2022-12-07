@@ -5,6 +5,8 @@ __pycache__/
 surfaces/
 surfaces_graphs/
 surfaces_graphs_iface/
+patch_label_1/
+patch_label_0/
 # C extensions
 *.so
 
