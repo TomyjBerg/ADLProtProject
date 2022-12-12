@@ -85,6 +85,8 @@ class PatchDataset(Dataset):
         adj1 = torch.squeeze(to_dense_adj(edge_index1))
 
         x2 = patch2.x.float()
+        x2[:,0] = x2[:,0]*-1
+        x2[:,1] = x2[:,1]*-1
         y2 = torch.tensor(patch2.y).long()
         edge_index2 = patch2.edge_index.long()
         adj2 = torch.squeeze(to_dense_adj(edge_index2))   
