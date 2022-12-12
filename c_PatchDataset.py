@@ -7,6 +7,7 @@ from torch_geometric.data import Dataset
 from helper_functions import load_object
 from torch_geometric.data import Data
 from torch_geometric.utils import to_dense_adj
+import torch.nn.functional as f
 
 
 class PairData(Data):
@@ -80,13 +81,15 @@ class PatchDataset(Dataset):
 
 
         x1 = patch1.x.float()
+        x1 = f.normalize(x1,dim=1)
+        x1[:,1] = x1[:,1]*(-1)
+        x1[:,0] = x1[:,0]*(-1)
         y1 = torch.tensor(patch1.y).long()
         edge_index1 = patch1.edge_index.long()
         adj1 = torch.squeeze(to_dense_adj(edge_index1))
 
         x2 = patch2.x.float()
-        x2[:,0] = x2[:,0]*-1
-        x2[:,1] = x2[:,1]*-1
+        x2 = f.normalize(x2,dim=1)
         y2 = torch.tensor(patch2.y).long()
         edge_index2 = patch2.edge_index.long()
         adj2 = torch.squeeze(to_dense_adj(edge_index2))   
