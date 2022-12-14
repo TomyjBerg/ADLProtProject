@@ -13,8 +13,8 @@ import torch.nn.functional as f
 class PairData(Data):
     def __init__(self, x1, edge_index1, x2, edge_index2, y):
         super().__init__()
-        #self.adj1 = adj1
-        self.x1 = x1
+        #self.adj = adj1
+        self.x = x1
         self.edge_index = edge_index1
         #self.adj2 = adj2
         self.x2 = x2
