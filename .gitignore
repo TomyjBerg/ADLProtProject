@@ -9,7 +9,10 @@ patch_label_1/
 patch_label_0/
 # C extensions
 *.so
-
+*.pt
+*.npy
+*.txt
+*.png
 # Distribution / packaging
 .Python
 build/
