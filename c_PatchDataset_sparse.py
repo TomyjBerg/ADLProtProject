@@ -6,20 +6,8 @@ import fnmatch
 from torch_geometric.data import Dataset
 from helper_functions import load_object
 from torch_geometric.data import Data
-from torch_geometric.utils import to_dense_adj
+#from torch_geometric.utils import to_dense_adj
 import torch.nn.functional as f
-
-
-class PairData(Data):
-    def __init__(self, x1, edge_index1, x2, edge_index2, y):
-        super().__init__()
-        #self.adj = adj1
-        self.x = x1
-        self.edge_index = edge_index1
-        #self.adj2 = adj2
-        self.x2 = x2
-        self.edge_index2 = edge_index2
-        self.y = y
 
 
 class PatchDataset(Dataset):
@@ -96,10 +84,4 @@ class PatchDataset(Dataset):
         edge_index2 = patch2.edge_index.long()
         #adj2 = torch.squeeze(to_dense_adj(edge_index2))   
 
-        return PairData(edge_index1 = edge_index1, x1=x1, edge_index2 = edge_index2, x2=x2, y=torch.tensor(positive).long())
-
-        #return  Data(x=x1, y=y1, adj = adj1, x2 = x2, y2=y2, adj2 = adj2)
-        # edge_attr = None, 
-        # pos = None,
-        # edge_index= edge_index1,
-        # edge_index2 = edge_index2, 
+        return Data(edge_index = edge_index1, x=x1, y=torch.tensor(positive).long()), Data(edge_index = edge_index2, x=x2, y=torch.tensor(positive).long())
