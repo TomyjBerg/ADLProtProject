@@ -8,6 +8,7 @@ def visualize_pointcloud(coords, show_normals=False, colors=None):
 
     pointcloud = o3d.geometry.PointCloud()
     pointcloud.points = o3d.utility.Vector3dVector(coords)
+    coordinates = o3d.geometry.TriangleMesh.create_coordinate_frame()
     
     if colors is not None:
         pointcloud.colors = o3d.utility.Vector3dVector(colors)
@@ -18,4 +19,4 @@ def visualize_pointcloud(coords, show_normals=False, colors=None):
         o3d.visualization.draw_geometries([pointcloud], point_show_normal = True)
 
     else: 
-        o3d.visualization.draw_geometries([pointcloud])
+        o3d.visualization.draw_geometries([pointcloud, coordinates])
