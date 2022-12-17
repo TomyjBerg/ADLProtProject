@@ -15,6 +15,7 @@ def visualize_pointcloud(coords, show_normals=False, colors=None):
     if show_normals:
         pointcloud.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamKNN(knn = 5))
         pointcloud.orient_normals_consistent_tangent_plane(k=5)
+        
         o3d.visualization.draw_geometries([pointcloud], point_show_normal = True)
 
     else: 
