@@ -1,7 +1,16 @@
 # ADLProtProject
+
 ### Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks. 
 
+--------------------------------------------------------------------------------------------------
+### Objectives
+
+Aim : Neural Network to classify pairs of  protein surfaces into binding and not binding​
+​
+Model: Siamese Graph Convolutional Neural Network​
+
 ---------------------------------------------------------------------------------------------------
+### Content
 
 The Git Hub folder contains 4 class files :
 
@@ -46,6 +55,18 @@ The Git hub Folder contains differents notebook :
 
 - model_siamese_diff_pool : Perform Siamese Graph Neuron Network with a DiffPool on the GraphPatch Dataset.
 
+---------------------------------------------------------------------------------------------------
+### Dataset
+
+Training Data: Compiled a dataset of protein complexes from the protein data bank to train the model.​
+
+Data Generation : 
+
+- Protein Surfaces as triangular meshes are generated with MSMS program and PyMesh.​ 
+
+- Electrostatics computed with PDB2PQR and APBS​
+
+- Assignment of hydropathy and electron/proton donor potential according to the closest atoms​
 
 
 ---------------------------------------------------------------------------------------------------
