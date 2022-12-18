@@ -1,6 +1,7 @@
 # ADLProtProject
 
-Created by Graber David & Berger Thomas
+Created by Graber David : https://github.com/DavidGraber
+& Berger Thomas : https://github.com/TomyjBerg
 
 ### Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks.
 
