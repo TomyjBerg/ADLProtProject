@@ -1,8 +1,6 @@
 # ADLProtProject
 
-Student : 
-- Graber David
-- Berger Thomas
+Created by Graber David & Berger Thomas
 
 ### Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks.
 
