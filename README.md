@@ -1,6 +1,10 @@
 # ADLProtProject
 
-### Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks. 
+Student : 
+- Graber David
+- Berger Thomas
+
+### Repository with code for predicting protein-protein interactions with geometric deep learning and graph neural networks.
 
 --------------------------------------------------------------------------------------------------
 ### Objectives
