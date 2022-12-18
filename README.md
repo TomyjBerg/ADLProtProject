@@ -5,8 +5,8 @@
 --------------------------------------------------------------------------------------------------
 ### Objectives
 
-Aim : Neural Network to classify pairs of  protein surfaces into binding and not binding​
-​
+Aim : Neural Network to classify pairs of  protein surfaces into binding and not binding
+
 Model: Siamese Graph Convolutional Neural Network​
 
 ---------------------------------------------------------------------------------------------------
